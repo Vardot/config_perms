@@ -1,4 +1,4 @@
-name: Custom permissions
+name: Custom Permissions
 type: module
 description: Allows additional permissions to be created and managed through an administration form.
 core: 8.x
