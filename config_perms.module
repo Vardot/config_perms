@@ -38,7 +38,7 @@ function config_perms_parse_path($route) {
     return $string;
   }
   else {
-    $route = str_replace(["\r\n", "\n\r", "\n", "\r"], "\n", $route);
+    $route = $route ? str_replace(["\r\n", "\n\r", "\n", "\r"], "\n", $route) : "";
     $parts = explode("\n", $route);
     return $parts;
   }
