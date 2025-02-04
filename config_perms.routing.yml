@@ -10,6 +10,15 @@ entity.custom_perms_entity.delete_form:
   options:
     _admin_route: TRUE
 
+entity.custom_perms_entity.edit_form:
+  path: '/admin/structure/custom_perms_entity/{custom_perms_entity}/edit'
+  defaults:
+    _entity_form: 'Drupal\config_perms\Form\CustomPermsEntityForm'
+  requirements:
+    _permission: 'administer config permissions'
+  options:
+    _admin_route: TRUE
+
 custom_perms_select_list_form:
   path: '/admin/people/custom-permissions/list'
   defaults:
