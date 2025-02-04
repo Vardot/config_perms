@@ -2,9 +2,10 @@
 
 namespace Drupal\config_perms\Form;
 
+use Drupal\config_perms\Entity\CustomPermsEntity;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\config_perms\Entity\CustomPermsEntity;
+use Drupal\Core\Link;
 use Drupal\Core\Url;
 
 /**
@@ -74,7 +75,7 @@ class ConfigPermListForm extends FormBase {
 
       // Delete link.
       $url_object = Url::fromUri('internal:/admin/structure/custom_perms_entity/' . $perm->id() . '/delete');
-      $delete_link = \Drupal::l($this->t('Delete'), $url_object);
+      $delete_link = Link::fromTextAndUrl($this->t('Delete'), $url_object);
       $form['perms']['local'][$key]['delete'] = [
         '#type' => 'item',
         '#markup' => $delete_link,
@@ -213,7 +214,7 @@ class ConfigPermListForm extends FormBase {
     }
 
     \Drupal::service('router.builder')->rebuild();
-    drupal_set_message($this->t('The permissions have been saved.'));
+    $this->messenger()->addStatus($this->t('The permissions have been saved.'));
   }
 
   /**
