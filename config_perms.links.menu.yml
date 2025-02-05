@@ -1,0 +1,5 @@
+custom_perms_select_list_form:
+  title: 'Custom permissions'
+  description: 'Set additional permissions.'
+  parent: entity.user.collection
+  route_name: custom_perms_select_list_form
