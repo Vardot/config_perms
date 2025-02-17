@@ -1,7 +1,12 @@
 name: Custom Permissions
 type: module
 description: Allows additional permissions to be created and managed through an administration form.
-core_version_requirement: ^8 || ^9 || ^10 || ^11
+core_version_requirement: ~10 || ~11
 configure: custom_perms_select_list_form
 package: Permissions
 features: true
+
+# Information added by Vardot on 2025-02-17
+version: '2.2.0'
+project: 'config_perms'
+datestamp: 1739798717
