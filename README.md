@@ -34,6 +34,8 @@ path(s).
 
 These permissions can then be assigned to roles on the permissions page.
 
+If *any* permission has a given path, **any person with a role having that permission can visit that path**.
+
 ### Installation
 
 [Install as usual with composer](https://www.drupal.org/documentation/install/modules-themes/modules-8), or alternatively place the entirety of this
