@@ -4,12 +4,39 @@ namespace Drupal\config_perms\Form;
 
 use Drupal\Core\Entity\EntityConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteBuilderInterface;
 use Drupal\Core\Url;
 
 /**
  * Builds the form to delete Custom perms entity entities.
  */
 class CustomPermsEntityDeleteForm extends EntityConfirmFormBase {
+
+  /**
+   * The router builder.
+   *
+   * @var \Drupal\Core\Routing\RouteBuilderInterface
+   */
+  protected $routerBuilder;
+
+  /**
+   * Constructs a new CustomPermsEntityDeleteForm.
+   *
+   * @param \Drupal\Core\Routing\RouteBuilderInterface $router_builder
+   *   The router builder service.
+   */
+  public function __construct(RouteBuilderInterface $router_builder) {
+    $this->routerBuilder = $router_builder;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create($container) {
+    return new static(
+      $container->get('router.builder')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -39,15 +66,13 @@ class CustomPermsEntityDeleteForm extends EntityConfirmFormBase {
     $this->entity->delete();
 
     $this->messenger()->addMessage(
-      $this->t('content @type: deleted @label.',
-        [
-          '@type' => $this->entity->bundle(),
-          '@label' => $this->entity->label(),
-        ]
-        )
+      $this->t('content @type: deleted @label.', [
+        '@type' => $this->entity->bundle(),
+        '@label' => $this->entity->label(),
+      ])
     );
 
-    \Drupal::service('router.builder')->rebuild();
+    $this->routerBuilder->rebuild();
 
     $form_state->setRedirectUrl($this->getCancelUrl());
   }

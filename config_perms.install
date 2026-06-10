@@ -1,7 +1,18 @@
 <?php
 
 /**
- * Updates the paths to its entities.
+ * @file
+ * Contains update hooks for the Config Perms module.
+ */
+
+/**
+ * Converts old path-based permission entries to route-based entries.
+ *
+ * Parses the 'path' value of each custom permission config entity and
+ * attempts to resolve it to a route name. If successful, replaces the
+ * 'path' key with a 'route' key in the configuration.
+ *
+ * This ensures all custom permissions are stored in route-based format.
  */
 function config_perms_update_8201() {
   $config_factory = \Drupal::configFactory();
@@ -31,7 +42,11 @@ function config_perms_update_8201() {
 }
 
 /**
- * Adds the "administer config permissions" permission.
+ * Grants new "administer config permissions" to roles with site config access.
+ *
+ * Ensures backward compatibility by granting the new, more specific permission
+ * to any role that previously had the broader
+ * "administer site configuration" permission.
  */
 function config_perms_update_8202() {
   $roles = \Drupal::entityTypeManager()->getStorage('user_role')->loadMultiple();
@@ -40,6 +55,7 @@ function config_perms_update_8202() {
     // There is now a dedicated permission to configure the module, to keep the
     // things working let's provide this new permission to the users that were
     // already able to configure the module before.
+    // Assign new permission to preserve current access for administrators.
     if ($role->hasPermission('administer site configuration')) {
       $role->grantPermission('administer config permissions');
       $role->save();

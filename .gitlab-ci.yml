@@ -39,46 +39,46 @@ variables:
   # Opt in variables: Broaden test coverage.
   ################
   OPT_IN_TEST_CURRENT: 1
-  OPT_IN_TEST_PREVIOUS_MAJOR: 0
-  OPT_IN_TEST_PREVIOUS_MINOR: 0
-  OPT_IN_TEST_NEXT_MINOR: 0
-  OPT_IN_TEST_NEXT_MAJOR: 0
-  OPT_IN_TEST_MAX_PHP: 0
+  OPT_IN_TEST_PREVIOUS_MAJOR: 1
+  OPT_IN_TEST_PREVIOUS_MINOR: 1
+  OPT_IN_TEST_NEXT_MINOR: 1
+  OPT_IN_TEST_NEXT_MAJOR: 1
+  OPT_IN_TEST_MAX_PHP: 1
   # Speed up the execution of the Tests.
-  # _PHPUNIT_CONCURRENT: 1
+  _PHPUNIT_CONCURRENT: 1
   # # Convenient for debugging: Enable in issue forks for testing.
   # _SHOW_ENVIRONMENT_VARIABLES: 1
 
   # Strict PHPSTAN validation: Enforce the *maximum* rule level: 9.
   # _PHPSTAN_LEVEL: 9
 
-# #
-# # CSPELL overrides and configuration.
-# #
-# cspell:
-#   # Require spellcheck to pass.
-#   allow_failure: false
+#
+# CSPELL overrides and configuration.
+#
+cspell:
+  # Require spellcheck to pass.
+  allow_failure: true
 
-# #
-# # ESLINT overrides and configuration.
-# #
-# eslint:
-#   # Require eslint to pass.
-#   allow_failure: false
+#
+# ESLINT overrides and configuration.
+#
+eslint:
+  # Require eslint to pass.
+  allow_failure: true
 
-# #
-# # PHPCS overrides and configuration.
-# #
-# phpcs:
-#   # Require phpcs to pass.
-#   allow_failure: false
+#
+# PHPCS overrides and configuration.
+#
+phpcs:
+  # Require phpcs to pass.
+  allow_failure: true
 
-# #
-# # PHPSTAN overrides and configuration.
-# #
-# phpstan:
-#   # Require phpstan to pass.
-#   allow_failure: false
+#
+# PHPSTAN overrides and configuration.
+#
+phpstan:
+  # Require phpstan to pass.
+  allow_failure: true
 
 # #
 # # PHPUNIT overrides and configuration.

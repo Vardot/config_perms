@@ -5,7 +5,11 @@ namespace Drupal\Tests\config_perms\Functional;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Tests that the perms are working.
+ * Functional tests for the config_perms module.
+ *
+ * Verifies that custom configuration permissions behave as expected,
+ * including default behavior, correct access restriction, and permission
+ * overrides.
  *
  * @group config_perms
  */
@@ -21,6 +25,12 @@ class ConfigPermsTest extends BrowserTestBase {
    */
   protected static $modules = ['config_perms'];
 
+  /**
+   * Tests access to the custom permissions admin page based on permissions.
+   *
+   * Verifies that a user with 'administer config permissions' can access
+   * the page, while a user without it cannot.
+   */
   public function testAdministerConfigPermsPermission() {
     $user_with_permission = $this->drupalCreateUser(['administer config permissions']);
     $user_without_permission = $this->drupalCreateUser();
@@ -39,7 +49,10 @@ class ConfigPermsTest extends BrowserTestBase {
   }
 
   /**
-   * Tests that the permissions are applied correctly.
+   * Tests that permissions are enforced for accessing account settings.
+   *
+   * Confirms that a user with the 'Administer account settings' permission
+   * can view the settings page, while one without cannot.
    */
   public function testPermissions() {
     $user_with_permission = $this->drupalCreateUser(['Administer account settings']);
@@ -57,11 +70,13 @@ class ConfigPermsTest extends BrowserTestBase {
     $this->drupalGet('admin/config/people/accounts');
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalLogout();
-
   }
 
   /**
-   * Tests that the permissions are overridden correctly.
+   * Tests that core permissions can be overridden by config_perms settings.
+   *
+   * Ensures that a user with the custom 'Administer account settings'
+   * permission has access, while a user with only the core permission does not.
    */
   public function testOverridePermissions() {
     $user_custom_permission = $this->drupalCreateUser(['Administer account settings']);

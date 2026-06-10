@@ -2,7 +2,7 @@
 
 This very lightweight module allows additional permissions to be created and
 managed through an administration form. It uses the menu access system to allow
-or dissalow access.
+or disallow access.
 
 On an administration page, a user is able to create a permission with name and
 paths. These permissions can then be assigned to roles on the permissions page.
@@ -40,6 +40,7 @@ information, see
 See add/edit/delete permissions in /admin/people/custom-permissions/list.
 
 ## Maintainers
+<!--- cspell:disable -->
 
 Alphabetical by username:
 
@@ -59,3 +60,5 @@ Alphabetical by organization name:
 - [Agaric](https://www.drupal.org/agaric)
 - [Salsa Digital](https://www.drupal.org/salsa-digital)
 - [UTIKS](https://www.drupal.org/utiks)
+
+<!--- cspell:enable -->
