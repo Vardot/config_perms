@@ -211,10 +211,19 @@ class ConfigPermListForm extends FormBase {
     $perms = CustomPermsEntity::loadMultiple();
 
     foreach ($values['local'] as $key => $perm) {
-      if (empty($perm['name']) && empty($perm['route']) && $key !== 'new') {
-        CustomPermsEntity::load($perm['id'])->delete();
+      // Special handling when there's no name or route.
+      if (empty($perm['name']) && empty($perm['route'])) {
+        if ($key == 'new') {
+          // Ignore if everything is empty for new entry.
+          continue;
+        }
+        else {
+          // Delete if clearing out existing entry.
+          CustomPermsEntity::load($perm['id'])->delete();
+        }
       }
       else {
+        // There is data so check it's valid.
         if (empty($perm['name'])) {
           $form_state->setErrorByName("local][$key", $this->t("The name cannot be empty."));
         }
@@ -244,6 +253,11 @@ class ConfigPermListForm extends FormBase {
     $perms = CustomPermsEntity::loadMultiple();
 
     foreach ($values['local'] as $key => $data) {
+      // Handle case where there's an empty entry.
+      if (empty($data['name']) && empty($data['route'])) {
+        continue;
+      }
+      // If new permission.
       if ($key === 'new') {
         $entity = CustomPermsEntity::create();
         $entity->set('id', $this->configPermsGenerateMachineName($data['name']));
